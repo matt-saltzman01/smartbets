@@ -13,6 +13,7 @@ contract Outcome is usingOraclize {
   address public winnerAddress;
   address public player1;
   address public player2;
+  string public queryResult;
 
   // current Stage
   Stages public stage = Stages.Betting;
@@ -39,7 +40,16 @@ contract Outcome is usingOraclize {
     return Stages(uint(stage));
   }
 
+  function getPlayer1Bet() public view returns (string) {
+    return bets[player1];
+  }
+
+  function getQueryResult() public view returns (string) {
+    return queryResult;
+  }
+
   function placeBet(string teamID) public payable atStage(Stages.Betting) {
+    require(msg.value == 10000000000000000 || msg.value == 20000000000000000 || msg.value == 30000000000000000);
     bets[msg.sender] = teamID;
     betsPlaced += 1;
     if (betsPlaced == 1) {
@@ -58,6 +68,7 @@ contract Outcome is usingOraclize {
 
   function __callback(bytes32 myid, string result) {
     //winnerID = result;
+    queryResult = result;
     if (keccak256(bets[player1]) == keccak256(result)) {
       player1.transfer(escrow.balance);
       winnerAddress = player1;

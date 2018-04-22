@@ -19,12 +19,19 @@ import outcome_artifacts from '../../build/contracts/Outcome.json'
 
 var Outcome = contract(outcome_artifacts);
 
+Outcome.setProvider(web3.currentProvider);
+
 window.placeBet = function() {
     var inputs = document.getElementById("place_bet_form").elements;
     var inputTeamID = inputs["team_id"].value;
     var inputAmount = inputs["amount"].value;
     console.log("inputTeamID: " + inputTeamID);
     console.log("inputAmount: " + inputAmount);
+    Outcome.deployed().then(function(contractInstance) {
+      console.log("here");
+      let app = contractInstance;
+      app.placeBet(inputTeamID, {from: web3.eth.accounts[0], value: web3.toWei(inputAmount, "ether")});
+    });
 }
 
 $( document ).ready(function() {
