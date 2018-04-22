@@ -1,5 +1,5 @@
 pragma solidity ^0.4.18;
-import "/home/jmkjr/Gambling/Training/ethereum-api-master/oraclizeAPI.sol";
+import "/Users/Matt/Documents/senior_spring/ethereum-api-master/oraclizeAPI.sol";
 
 contract Outcome is usingOraclize {
   enum Stages {
