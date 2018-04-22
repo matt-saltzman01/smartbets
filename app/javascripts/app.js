@@ -15,11 +15,9 @@ import { default as contract } from 'truffle-contract'
  * https://gist.github.com/maheshmurthy/f6e96d6b3fff4cd4fa7f892de8a1a1b4#file-index-js
  */
 
-import voting_artifacts from '../../build/contracts/Voting.json'
+import outcome_artifacts from '../../build/contracts/Outcome.json'
 
-var Voting = contract(voting_artifacts);
-
-let candidates = {"Rama": "candidate-1", "Nick": "candidate-2", "Jose": "candidate-3"}
+var Outcome = contract(outcome_artifacts);
 
 window.placeBet = function() {
     var inputs = document.getElementById("place_bet_form").elements;
