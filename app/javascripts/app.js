@@ -21,29 +21,12 @@ var Voting = contract(voting_artifacts);
 
 let candidates = {"Rama": "candidate-1", "Nick": "candidate-2", "Jose": "candidate-3"}
 
-window.voteForCandidate = function(candidate) {
-  let candidateName = $("#candidate").val();
-  try {
-    $("#msg").html("Vote has been submitted. The vote count will increment as soon as the vote is recorded on the blockchain. Please wait.")
-    $("#candidate").val("");
-
-    /* Voting.deployed() returns an instance of the contract. Every call
-     * in Truffle returns a promise which is why we have used then()
-     * everywhere we have a transaction call
-     */
-    Voting.deployed().then(function(contractInstance) {
-      console.log(web3.eth.accounts[0]);
-      contractInstance.voteForCandidate(candidateName, {gas: 140000, from: web3.eth.accounts[0]}).then(function() {
-        let div_id = candidates[candidateName];
-        return contractInstance.totalVotesFor.call(candidateName).then(function(v) {
-          $("#" + div_id).html(v.toString());
-          $("#msg").html("");
-        });
-      });
-    });
-  } catch (err) {
-    console.log(err);
-  }
+window.placeBet = function() {
+    var inputs = document.getElementById("place_bet_form").elements;
+    var inputTeamID = inputs["team_id"].value;
+    var inputAmount = inputs["amount"].value;
+    console.log("inputTeamID: " + inputTeamID);
+    console.log("inputAmount: " + inputAmount);
 }
 
 $( document ).ready(function() {
@@ -55,16 +38,5 @@ $( document ).ready(function() {
     console.warn("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
     window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-  }
-
-  Voting.setProvider(web3.currentProvider);
-  let candidateNames = Object.keys(candidates);
-  for (var i = 0; i < candidateNames.length; i++) {
-    let name = candidateNames[i];
-    Voting.deployed().then(function(contractInstance) {
-      contractInstance.totalVotesFor.call(name).then(function(v) {
-        $("#" + candidates[name]).html(v.toString());
-      });
-    })
   }
 });
