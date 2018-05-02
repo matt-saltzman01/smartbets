@@ -2,13 +2,10 @@
 <html>
 <head>
   <title>SmartBets DApp</title>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>-->
   <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-  <link href="app/stylesheets/blog.css" rel="stylesheet">
-
-
 </head>
-<body class="container">
+<body>
     <nav class="blog-masthead navbar-fixed-top">
         <div class="container">
             <header class="blog-nav-header">
@@ -21,8 +18,8 @@
         </div>
     </nav>
 
-    <div class="container">
-        <header>
+    <div class="container content">
+        <header class="blog-header">
             <h1 class="blog-title">Betting Form</h1>
             <p id="userTypeInfoPr" class="lead blog-description">
                 Please place your bet for Match ID: 1788377376
@@ -30,35 +27,66 @@
         </header>
 
         <div class="row">
-            <form id="place_bet_form" action="" class="form-horizontal">
-                <div class="form-group">
-                    <label for="team_id" class="control-label col-sm-offset-3 col-sm-2">Team ID</label>
-                    <div class="col-sm-4">
-                        <select class="form-control" id="team_id" name="team_id">
-                            <option value="" selected="selected">Please select a team</option>
-                            <option value="100">100</option>
-                            <option value="200">200</option>
-                        </select>
+            <article class="blog-post">
+                <h2 class="blog-post-title">Bet on winning team</h2>
+                <form id="winning_team_form" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="winning_team_id" class="control-label col-sm-offset-3 col-sm-2">Team ID</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="winning_team_id" name="winning_team_id">
+                                <option value="" selected="selected">Please select a team</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="amount" class="control-label col-sm-offset-3 col-sm-2">Bet Amount</label>
-                    <div class="col-sm-4">
-                        <select class="form-control" id="amount" name="amount">
-                            <option value="" selected="selected">Please select an amount</option>
-                            <option value="0.01">0.01</option>
-                            <option value="0.02">0.02</option>
-                            <option value="0.03">0.03</option>
-                        </select>
+                    <div class="form-group">
+                        <label for="winning_team_amount" class="control-label col-sm-offset-3 col-sm-2">Bet Amount</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="winning_team_amount" name="winning_team_amount">
+                                <option value="" selected="selected">Please select an amount</option>
+                                <option value="0.01">0.01 ether</option>
+                                <option value="0.02">0.02 ether</option>
+                                <option value="0.03">0.03 ether</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <a href="#" onclick="placeBet()" class="btn btn-primary">Bet</a>
-            </form>
+                    <input type="button" id="winning_team_button" name="winning_team_button" value="Bet" class="btn btn-default btn-primary col-sm-offset-6">
+                </form>
+            </article>
+
+            <article class="blog-post">
+                <h6 class="blog-post-title">Bet on team with first dragon</h6>
+                <form id="first_dragon_form" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="first_dragon_team_id" class="control-label col-sm-offset-3 col-sm-2">Team ID</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="first_dragon_team_id" name="first_dragon_team_id">
+                                <option value="" selected="selected">Please select a team</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="first_dragon_amount" class="control-label col-sm-offset-3 col-sm-2">Bet Amount</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="first_dragon_amount" name="first_dragon_amount">
+                                <option value="" selected="selected">Please select an amount</option>
+                                <option value="0.01">0.01 ether</option>
+                                <option value="0.02">0.02 ether</option>
+                                <option value="0.03">0.03 ether</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="button" id="first_dragon_button" name="first_dragon_button" value="Bet" class="btn btn-default btn-primary col-sm-offset-6">
+                </form>
+            </article>
         </div>
     </div>
 
     <footer class="blog-footer">
-        <p>Copyright &copy; SmartBets </p>
+        <p>Copyright &copy; 2018 SmartBets. All rights reserved.</p>
     </footer>
 
 </body>

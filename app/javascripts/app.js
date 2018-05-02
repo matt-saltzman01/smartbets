@@ -21,10 +21,10 @@ var Outcome = contract(outcome_artifacts);
 
 Outcome.setProvider(web3.currentProvider);
 
-window.placeBet = function() {
-    var inputs = document.getElementById("place_bet_form").elements;
-    var inputTeamID = inputs["team_id"].value;
-    var inputAmount = inputs["amount"].value;
+function betOnWinningTeam() {
+    var inputs = document.getElementById("winning_team_form").elements;
+    var inputTeamID = inputs["winning_team_id"].value;
+    var inputAmount = inputs["winning_team_amount"].value;
     console.log("inputTeamID: " + inputTeamID);
     console.log("inputAmount: " + inputAmount);
     Outcome.deployed().then(function(contractInstance) {
@@ -34,7 +34,14 @@ window.placeBet = function() {
     });
 }
 
-$( document ).ready(function() {
+function betOnTeamWithFirstDragon() {
+    // put code here
+}
+
+$(document).ready(function() {
+    $("#winning_team_button").click(betOnWinningTeam);
+    $("#first_dragon_button").click(betOnTeamWithFirstDragon);
+
   if (typeof web3 !== 'undefined') {
     console.warn("Using web3 detected from external source like Metamask")
     // Use Mist/MetaMask's provider
