@@ -16,10 +16,13 @@ import { default as contract } from 'truffle-contract'
  */
 
 import outcome_artifacts from '../../build/contracts/Outcome.json'
+import dragon_artifacts from '../../build/contracts/Dragon.json'
 
 var Outcome = contract(outcome_artifacts);
+var Dragon = contract(dragon_artifacts);
 
 Outcome.setProvider(web3.currentProvider);
+Dragon.setProvider(web3.currentProvider);
 
 function betOnWinningTeam() {
     var inputs = document.getElementById("winning_team_form").elements;
@@ -28,14 +31,19 @@ function betOnWinningTeam() {
     console.log("inputTeamID: " + inputTeamID);
     console.log("inputAmount: " + inputAmount);
     Outcome.deployed().then(function(contractInstance) {
-      console.log("here");
       let app = contractInstance;
       app.placeBet(inputTeamID, {from: web3.eth.accounts[0], value: web3.toWei(inputAmount, "ether")});
     });
 }
 
 function betOnTeamWithFirstDragon() {
-    // put code here
+    var inputs = document.getElementById("first_dragon_form").elements;
+    var inputTeamID = inputs["first_dragon_team_id"].value;
+    var inputAmount = inputs["first_dragon_amount"].value;
+    Dragon.deployed().then(function(contractInstance) {
+      let app = contractInstance;
+      app.placeBet(inputTeamID, {from: web3.eth.accounts[0], value: web3.toWei(inputAmount, "ether")});
+    });
 }
 
 $(document).ready(function() {
