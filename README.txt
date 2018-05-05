@@ -17,7 +17,7 @@ Deployment Steps:
         	'sudo add-apt-repository -y ppa:ethereum/ethereum'
         	'sudo apt-get update'
         	'sudo apt-get install ethereum'
-2. Run a Rinkeby Node 
+2. Run a Rinkeby Node
 	    During this process we'll be interacting with the Rinkeby testnet.
 	    In order to do this you'll need to be running a node on Rinkeby during
 	    the development process. In order to do this open up a new terminal window
@@ -33,15 +33,21 @@ Deployment Steps:
 			'web3.personal.unlockAccount('newAccountAddress', 'verystrongpassword', 15000)'
 5. Deploy smart contract
 		From base directory of this repo run
-			'truffle migrate'
+			'truffle migrate --compile-all --reset'
 				THIS WILL TAKE SEVERAL MINUTES AND REQUIRES THAT:
 					1. YOU ARE RUNNING YOUR RINKEBY NODE
 					2. THE FIRST TRUFFLE ACCOUNT YOU HAVE IS FUNDED AND UNLOCKED
+          3. YOU HAVE CHANGED THE IMPORT STATEMENTS IN Outcome.sol AND Dragon.sol
+          TO YOUR RESPECTIVE PATH TO THE ORACLIZE API IN NODE MODULES
+          4. YOU SHOULD SEE COMPILATION WARNINGS FOR ORACLIZE, THIS IS FINE
 6. Build web application
 		Use 'npm run dev' to spin up the web application
 		Go to localhost:8080 to interact with the smart contract betting web application
-			When interacting with the web application either:
-				Use a Dbrowser such as mist
-				Use metamask for chrome an have funded wallets associated with the metamask 
+			When interacting with the web application:
+				Use metamask extension for chrome and have funded accounts associated with the metamask
 
 Congratulations! You have your very own Esports Smart Contract Betting Web Application!
+
+If any errors or difficulty is experienced in deploying the application there is
+a good chance it is neither our fault or yours since we rely on the Testnet.
+In the event of errors please reach out to jkuhn8@jhu.edu for assistance in deploying.
