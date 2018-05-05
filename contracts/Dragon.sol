@@ -1,7 +1,7 @@
 pragma solidity ^0.4.18;
 import "/home/jmkjr/Gambling/Training/smartbets/node_modules/ethereum-api-master/oraclizeAPI.sol";
 
-contract Outcome is usingOraclize {
+contract Dragon is usingOraclize {
   enum Stages {
     Betting,
     Settlement
@@ -24,7 +24,7 @@ contract Outcome is usingOraclize {
     _;
   }
 
-  function Outcome() public payable {
+  function Dragon() public payable {
     betsPlaced = 0;
     escrow = this;
   }
@@ -62,7 +62,7 @@ contract Outcome is usingOraclize {
       require(msg.value == player1amount);
       require(keccak256(bets[player1]) != keccak256(teamID));
       nextStage();
-      oraclize_query("URL", "json(https://blockchains-backend.herokuapp.com/get_winning_team_by_match_id/1788343955).teamId");
+      oraclize_query("URL", "json(https://blockchains-backend.herokuapp.com/get_team_with_first_dragon_by_match_id/1788343955).teamId");
     }
   }
 
@@ -75,9 +75,12 @@ contract Outcome is usingOraclize {
     if (keccak256(bets[player1]) == keccak256(result)) {
       player1.transfer(escrow.balance);
       winnerAddress = player1;
-    } else {
+    } else if (keccak256(bets[player2]) == keccak256(result)) {
       player2.transfer(escrow.balance);
       winnerAddress = player2;
+    } else {
+      player1.transfer(escrow.balance / 2.0);
+      player2.transfer(escrow.balance / 2.0);
     }
     reset();
   }

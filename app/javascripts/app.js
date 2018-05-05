@@ -2,8 +2,8 @@
 import "../stylesheets/app.css";
 
 // Import libraries we need.
-import { default as Web3} from 'web3';
-import { default as contract } from 'truffle-contract'
+import { default as Web3 } from 'web3';
+import { default as contract } from 'truffle-contract';
 
 /*
  * When you compile and deploy your Voting contract,
@@ -16,26 +16,46 @@ import { default as contract } from 'truffle-contract'
  */
 
 import outcome_artifacts from '../../build/contracts/Outcome.json'
+import dragon_artifacts from '../../build/contracts/Dragon.json'
 
 var Outcome = contract(outcome_artifacts);
+var Dragon = contract(dragon_artifacts);
 
 Outcome.setProvider(web3.currentProvider);
+Dragon.setProvider(web3.currentProvider);
 
 function betOnWinningTeam() {
     var inputs = document.getElementById("winning_team_form").elements;
     var inputTeamID = inputs["winning_team_id"].value;
     var inputAmount = inputs["winning_team_amount"].value;
-    console.log("inputTeamID: " + inputTeamID);
-    console.log("inputAmount: " + inputAmount);
-    Outcome.deployed().then(function(contractInstance) {
-      console.log("here");
-      let app = contractInstance;
-      app.placeBet(inputTeamID, {from: web3.eth.accounts[0], value: web3.toWei(inputAmount, "ether")});
-    });
+    if (isFieldValid(inputTeamID) && isFieldValid(inputAmount)) {
+      console.log("inputTeamID: " + inputTeamID);
+      console.log("inputAmount: " + inputAmount);
+      Outcome.deployed().then(function(contractInstance) {
+        let app = contractInstance;
+        app.placeBet(inputTeamID, {from: web3.eth.accounts[0], value: web3.toWei(inputAmount, "ether")});
+      });
+    } else {
+      alert("Please complete all required fields.");
+    }
 }
 
 function betOnTeamWithFirstDragon() {
-    // put code here
+    var inputs = document.getElementById("first_dragon_form").elements;
+    var inputTeamID = inputs["first_dragon_team_id"].value;
+    var inputAmount = inputs["first_dragon_amount"].value;
+    if (isFieldValid(inputTeamID) && isFieldValid(inputAmount)) {
+      Dragon.deployed().then(function(contractInstance) {
+        let app = contractInstance;
+        app.placeBet(inputTeamID, {from: web3.eth.accounts[0], value: web3.toWei(inputAmount, "ether")});
+      });
+    } else {
+      alert("Please complete all required fields");
+    }
+}
+
+function isFieldValid(field) {
+  return Boolean(field.trim());
 }
 
 $(document).ready(function() {
