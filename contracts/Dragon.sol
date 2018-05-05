@@ -80,7 +80,7 @@ contract Dragon is usingOraclize {
       winnerAddress = player2;
     } else {
       player1.transfer(escrow.balance / 2.0);
-      player2.transfer(escrow.balance / 2.0);
+      player2.transfer(escrow.balance);
     }
     reset();
   }
