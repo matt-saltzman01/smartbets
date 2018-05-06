@@ -7,6 +7,15 @@ About us:
 Our project is a web based League of Legends sports betting application!
 Deployment details are below.
 
+Disclaimer:
+Because we are leveraging the Riot API, our API key is only valid every 24 hours.
+Therefore testing the smart contract will probably throw an unauthorized access
+error on the back end. We will try our best to keep the API key valid every day
+but if you want to make sure it's ready on deployment let one of us know! Realistically
+you can honestly shoot me a text at (845-271-9734) or an email at (msaltzm5@jhu.edu) and
+I'll respond promptly to make sure it's updated for your testing. In a professional
+setting our API key would be valid at all times, obviously. 
+
 Deployment Steps:
 1. Install geth, this will be used to interact with ethereum blockchains
         Mac:
